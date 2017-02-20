@@ -1,0 +1,26 @@
+package helloWorldusingJava8;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class LambaExpressionModel {       // declaring public class LambaExpressionModel
+
+	public Employee findEmployeeByID(List<Employee> listOfEmployees, String eid){           // Defining findEmployeeByID method using LambaExpression.
+		Employee e1 = listOfEmployees.stream().filter(x -> "3".equals(x.getEid())).findAny().orElse(null);  // Filtering the data using LambaExpression
+		
+		return e1;
+	}
+	public List<Employee> defaultElements() {   // Defining List for Employee
+		
+		List<Employee> list = new ArrayList<Employee>();   // Declaring List for Employee as ArrayList
+		
+		list.add(new Employee("1","E1")); 
+		list.add(new Employee("2","E2"));
+		list.add(new Employee("3","E3"));
+		list.add(new Employee("4","E4"));  // passing the values to Employee entity
+		
+		return list;
+	}
+	
+}

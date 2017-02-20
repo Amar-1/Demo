@@ -1,0 +1,79 @@
+package helloWorldusingJava8;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
+import java.util.Scanner;
+
+/**
+ * Java 8 enables you to pass references of methods or constructors via the :: keyword. 
+ * @author Amar
+ *
+ */
+public class ConstructorReferenceTest1 {     
+
+	public static void main(String[] args) {       // Main method declaration
+	
+		//We create a reference to the Candidate constructor via Candidate::new
+		
+		CandidateFactory<Candidate> CandidateFactory = Candidate::new;
+		Candidate Candidate = CandidateFactory.create("ABC", "PQR");   // passing values to Candidate
+		
+		System.out.println(Candidate);      
+		
+		Converter<String, String> converter = Candidate::findingChar;   // converter implementation
+		
+		String converted = converter.convert("DemoJava8");     // Declaring a String using converter
+		System.out.println("Character at the provided input is = "+converted); 
+		
+		
+		LocalDate today = LocalDate.now();
+		System.out.println("Current Date="+today);
+		
+		LocalDate firstDay_2014 = LocalDate.of(2014, Month.JANUARY, 1);
+		System.out.println("Specific Date="+firstDay_2014);
+		
+		LocalDate dateFromBase = LocalDate.ofEpochDay(36);
+		System.out.println("365th day from base date= "+dateFromBase);
+		
+		LocalDate hundredDay2014 = LocalDate.ofYearDay(2014, 100);
+		System.out.println("100th day of 2014="+hundredDay2014);
+		
+		
+	}
+}
+
+class Candidate {
+    String firstName;     // Declaring data members to Candidate class
+    String lastName;      // Declaring data members to Candidate class
+
+    Candidate() {}          // Declaring Candidate default constructor
+
+    Candidate(String firstName, String lastName) {   // Declaring Candidate constructor and passing the arguments
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+	@Override
+	public String toString() {           // // returning the values using toString method.
+		return "Candidate [firstName=" + firstName + ", lastName=" + lastName
+				+ "]";
+	}
+    
+	public String findingChar(String s) {     // Declaring startsWithWhatLetter method
+		
+		int a;
+		 System.out.println("enter the position to find the letter");
+		 @SuppressWarnings("resource")
+		 Scanner scan = new Scanner(System.in);
+		 a = scan.nextInt(); 
+		 return String.valueOf(s.charAt(a));  
+    }
+    
+}
+interface CandidateFactory<P extends Candidate> {         // Defining interface P extension of Candidate
+    P create(String firstName, String lastName);
+}
+@FunctionalInterface               // This annotation used for compiler level errors when the interface you have annotated is not a valid Functional Interface
+interface Converter<F, T> {
+    T convert(F from);
+}

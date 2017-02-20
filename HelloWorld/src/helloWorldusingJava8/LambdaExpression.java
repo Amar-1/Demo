@@ -1,0 +1,27 @@
+package helloWorldusingJava8;
+
+import java.util.ArrayList;
+import java.util.List;
+
+ //This solution is to demonstrate lamdas/streams available in Java 8. And this deals with List of Students
+ 
+public class LambdaExpression {       // declaring public class LambaExpression
+
+	public Student findStudentByID(List<Student> listOfStudents, String sid){           // Defining findStudentByID method using LambaExpression.
+		Student s1 = listOfStudents.stream().filter(x -> "2".equals(x.getSid())).findAny().orElse(null);  // Filtering the data using LambaExpression
+		
+		return s1;
+	}
+	public List<Student> defaultElements() {   // Defining List for Student
+		
+		List<Student> list = new ArrayList<Student>();   // Declaring List for Student as ArrayList
+		
+		list.add(new Student("1","A")); 
+		list.add(new Student("2","B"));
+		list.add(new Student("3","C"));
+		list.add(new Student("3","D"));  // passing the values to Student entity
+		
+		return list;
+	}
+	
+}

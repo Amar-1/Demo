@@ -1,0 +1,54 @@
+package helloWorldusingJava8;
+
+/**
+ * Java 8 enables you to pass references of methods or constructors via the :: keyword. 
+ * @author Amar
+ *
+ */
+public class ConstructorReferenceTest1 {     
+
+	public static void main(String[] args) {       // Main method declaration
+	
+		//We create a reference to the Candidate constructor via Candidate::new
+		
+		CandidateFactory<Candidate> CandidateFactory = Candidate::new;
+		Candidate Candidate = CandidateFactory.create("ABC", "abc");   // passing values to Candidate
+		
+		System.out.println(Candidate);      
+		
+		Converter<String, String> converter = Candidate::startsWithWhatLetter;   // converter implementation
+		
+		String converted = converter.convert("Java8");     // Declaring a String using converter
+		System.out.println("Starts with = "+converted); 
+	}
+}
+
+class Candidate {
+    String firstName;     // Declaring data members to Candidate class
+    String lastName;      // Declaring data members to Candidate class
+
+    Candidate() {}          // Declaring Candidate default constructor
+
+    Candidate(String firstName, String lastName) {   // Declaring Candidate constructor and passing the arguments
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+	@Override
+	public String toString() {           // // returning the values using toString method.
+		return "Candidate [firstName=" + firstName + ", lastName=" + lastName
+				+ "]";
+	}
+    
+	public String startsWithWhatLetter(String s) {     // Declaring startsWithWhatLetter method
+        return String.valueOf(s.charAt(0));  
+    }
+    
+}
+interface CandidateFactory<P extends Candidate> {         // Defining interface P extension of Candidate
+    P create(String firstName, String lastName);
+}
+@FunctionalInterface               // This annotation used for compiler level errors when the interface you have annotated is not a valid Functional Interface
+interface Converter<F, T> {
+    T convert(F from);
+}

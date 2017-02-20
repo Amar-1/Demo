@@ -1,0 +1,34 @@
+package helloWorldusingJava8;
+
+public class Student {                // Defining Student POJO class 
+
+	private String sid;                // Declaring a private data memeber sid
+	private String sname;              // Declaring a private data memeber sname
+	 
+	public Student(){                  // Declaring public default constructor
+		super();
+	}
+	public Student(String sid, String sname) {     // Declaring public constructor and passing sid, ename
+		super();
+		this.sid = sid;
+		this.sname = sname;
+	}
+	public String getSid() {       // declaring getter method for sid
+		return sid;
+	}
+	public void setEid(String sid) {  // declaring setter method for sid
+		this.sid = sid;
+	}
+	public String getSname() {     // declaring getter method for sname
+		return sname;
+	}
+	public void setSname(String sname) {  // declaring setter method for sname
+		this.sname = sname;
+	}
+	
+	@Override
+	public String toString() {      // returning the values using toString method.
+		return "Student [sid=" + sid + ", sname=" + sname + "]";
+	}
+	
+}
